@@ -10,6 +10,12 @@ body {
     margin: 15px auto;
     text-align: center;
     width: 740px;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 h1 {
@@ -30,41 +36,66 @@ h1 {
     position: relative;
     width: 430px;
 }
-    .player {
-        position: absolute;
-        left: 4px;
-    }
-        .player:hover { cursor: pointer; }
-    .player-button {
-        background: rgb(0,0,0);
-        border: 2px rgb(255,255,255) solid;
-        border-radius: 10px;
-        display: inline-block;
-        height: 20px;
-        width: 20px;
-    }
-    .player-label { font-size: 11px; }
+
+.player {
+    position:relative;
+    float:left;
+    left:10px;
+    top:10px;
+    margin-left:10px;
+    margin-top:10px;
+}
+.player:hover {cursor:pointer;}
+.player-button {
+    background: rgb(0,0,0);
+    border: 2px rgb(255,255,255) solid;
+    border-radius: 10px;
+    display: inline-block;
+    height: 20px;
+    width: 20px;
+}
+.player-label {
+    font-size:11px;
+    border:1px rgba(50,50,50,0.25) solid;
+    background-color:rgba(50,50,50,0.25);
+    border-radius:5px;
+    padding-left:2px;
+    padding-right:2px;
+    padding-top:1px;
+    padding-bottom:1px;
+    color:rgba(255,255,255,0.5);
+    -webkit-transition:border 0.5s, background-color 0.5s, color 0.5s;
+    -moz-transition:border 0.5s, background-color 0.5s, color 0.5s;
+    -o-transition:border 0.5s, background-color 0.5s, color 0.5s;
+    -transition:border 0.5s, background-color 0.5s, color 0.5s;
+}
+.player:hover > .player-label {
+    border:1px rgba(50,50,50,0.75) solid;
+    background-color:rgba(50,50,50,0.75);
+    color:rgba(255,255,255,1);
+}
 
 #sidebar {
     float: right;
     font-size: 11px;
     width: 300px;
 }
-    #sidebar > * { background: rgb(0,100,0); margin-bottom: 5px; }
-    #gas-container { height: 250px; }
-    #share-id { padding: 15px; }
-        #share-id a:link, #share-id a:visited {
-            color: rgb(255,255,0);
-            text-decoration: none;
-        }
-        #share-id a:focus, #share-id a:hover {
-            color: rgb(255,255,255);
-        }
-    #reset-button, #save-button {
-        cursor: pointer;
-        padding: 15px;
-    }
-        #reset-button:hover, #save-button:hover {
-            background: rgb(0,0,0);
-            color: rgb(255,255,0);
-        }
+
+#sidebar > * { background: rgb(0,100,0); margin-bottom: 5px; }
+#gas-container { height: 250px; }
+#share-id { padding: 15px; }
+#share-id a:link, #share-id a:visited {
+    color: rgb(255,255,0);
+    text-decoration: none;
+}
+#share-id a:focus, #share-id a:hover {
+    color: rgb(255,255,255);
+}
+#reset-button, #save-button {
+    cursor: pointer;
+    padding: 15px;
+}
+#reset-button:hover, #save-button:hover {
+    background: rgb(0,0,0);
+    color: rgb(255,255,0);
+}
