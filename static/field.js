@@ -1,7 +1,12 @@
 (function() {
     var pos0 = {"x": 0, "y": 0};
     function relabel(label) {
-        $(label).text(prompt("Set player label:"));
+        var newLabel = prompt("Set player label:");
+        if(newLabel.replace(" ","").length>0) {
+            $(label).text(newLabel);
+        } else {
+            alert("Your input was empty.");
+        }
     }
     function move(p, e) {
         pos0 = {"x": e.pageX, "y": e.pageY};
