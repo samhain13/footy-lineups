@@ -41,7 +41,10 @@
         frm.submit();
     }
     $(document).ready( function() {
-        var pitch = $("#pitch");
+        //var pitch = $("#pitch");
+        // Original line by samhain13; places the players into the pitch.
+        // However, I think this is a bit better :P
+        var pitch = $("#gas-container");
         for (var i=0; i<11; i++) {
             var pid = "player-" + (i + 1);
             var p = $('<div id="' + pid + '" class="player"></div>');
@@ -50,7 +53,7 @@
                 p.css({"left": lineup[i]["left"], "top": lineup[i]["top"]});
             } else {
                 var label = "Player" + (i + 1);
-                p.css({"left": 0, "top": i * 50});
+                //p.css({"left": 0, "top": i * 50});
             }
             p.append($('<div class="player-button"></div>'));
             p.append($('<div class="player-label">' + label + '</div>'));
