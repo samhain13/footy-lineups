@@ -9,16 +9,20 @@
         }
     }
     function move(p, e) {
-        pos0 = {"x": e.pageX, "y": e.pageY};
-        $(window).mouseup( function(e) {
+        pos0 = {"x": e.pageX, "y": e.pageY}; // initial position.
+        $(window).mousemove( function(e) {
             var player = $(p).parent();
             var pos1 = {"x": e.pageX, "y": e.pageY};
             player.css({
                 "left": parseInt(player.css("left")) + (pos1["x"] - pos0["x"]),
                 "top": parseInt(player.css("top")) + (pos1["y"] - pos0["y"]),
             });
+            pos0 = pos1; // update the actual position.
+        });
+        $(window).mouseup( function(e) {
+            $(window).unbind("mousemove");
             $(window).unbind("mouseup");
-        })
+        });
     }
     function save_lineup() {
         var players = [];
