@@ -1,0 +1,70 @@
+html {
+    background: rgb(200,200,200);
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    color: rgb(255,255,255);
+    font-family: sans-serif;
+    margin: 15px auto;
+    text-align: center;
+    width: 740px;
+}
+
+h1 {
+    color: rgb(0,0,0);
+    font-size: 18px;
+    font-weight: normal;
+    margin: 0px 0px 5px 0px;
+    text-transform: uppercase;
+}
+
+#pitch {
+    background: url("field.svg") top left no-repeat;
+    background-size: 100% 100%;
+    border: 1px rgb(255,255,255) solid;
+    box-shadow: 4px 4px 4px rgba(0,0,0,0.6);
+    float: left;
+    height: 560px;
+    position: relative;
+    width: 430px;
+}
+    .player {
+        position: absolute;
+        left: 4px;
+    }
+        .player:hover { cursor: pointer; }
+    .player-button {
+        background: rgb(0,0,0);
+        border: 2px rgb(255,255,255) solid;
+        border-radius: 10px;
+        display: inline-block;
+        height: 20px;
+        width: 20px;
+    }
+    .player-label { font-size: 11px; }
+
+#sidebar {
+    float: right;
+    font-size: 11px;
+    width: 300px;
+}
+    #sidebar > * { background: rgb(0,100,0); margin-bottom: 5px; }
+    #gas-container { height: 250px; }
+    #share-id { padding: 15px; }
+        #share-id a:link, #share-id a:visited {
+            color: rgb(255,255,0);
+            text-decoration: none;
+        }
+        #share-id a:focus, #share-id a:hover {
+            color: rgb(255,255,255);
+        }
+    #reset-button, #save-button {
+        cursor: pointer;
+        padding: 15px;
+    }
+        #reset-button:hover, #save-button:hover {
+            background: rgb(0,0,0);
+            color: rgb(255,255,0);
+        }
