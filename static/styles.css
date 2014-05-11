@@ -40,10 +40,7 @@ h1 {
 .player {
     position:relative;
     float:left;
-    left:10px;
-    top:10px;
-    margin-left:10px;
-    margin-top:10px;
+    margin:10px;
 }
 .player:hover {cursor:pointer;}
 .player-button {
@@ -74,7 +71,20 @@ h1 {
     background-color:rgba(50,50,50,0.75);
     color:rgba(255,255,255,1);
 }
-
+#player-add-button {
+    position: relative;
+    bottom:0px;
+    font-size:20px;
+    background-color:rgba(50,50,50,0.5);
+    -webkit-transition:background-color 0.5s;
+    -moz-transition:background-color 0.5s;
+    -o-transition:background-color 0.5s;
+    -transition:background-color 0.5s;
+}
+#player-add-button:hover {
+    background-color:rgba(50,50,50,0.75);
+    cursor: pointer;
+}
 #sidebar {
     float: right;
     font-size: 11px;

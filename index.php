@@ -63,7 +63,9 @@ if (isset($_GET["lineup"])) {
         <h1>Football Line-Up</h1>
         <div id="pitch"></div>
         <div id="sidebar">
-            <div id="gas-container"></div>
+            <div id="gas-container">
+                <div id="player-add-button">+</div>
+            </div>
             <div id="share-id">
                 Drag the black buttons to reposition players;<br />
                 click the player labels to rename them.
