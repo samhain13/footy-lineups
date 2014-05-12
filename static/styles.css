@@ -38,11 +38,10 @@ h1 {
 }
 
 .player {
-    position:relative;
-    float:left;
+    position:absolute;
     margin:10px;
 }
-.player:hover {cursor:pointer;}
+.player:hover {cursor:move;}
 .player-button {
     background: rgb(0,0,0);
     border: 2px rgb(255,255,255) solid;
@@ -71,20 +70,6 @@ h1 {
     background-color:rgba(50,50,50,0.75);
     color:rgba(255,255,255,1);
 }
-#player-add-button {
-    position: relative;
-    bottom:0px;
-    font-size:20px;
-    background-color:rgba(50,50,50,0.5);
-    -webkit-transition:background-color 0.5s;
-    -moz-transition:background-color 0.5s;
-    -o-transition:background-color 0.5s;
-    -transition:background-color 0.5s;
-}
-#player-add-button:hover {
-    background-color:rgba(50,50,50,0.75);
-    cursor: pointer;
-}
 #sidebar {
     float: right;
     font-size: 11px;
@@ -92,7 +77,7 @@ h1 {
 }
 
 #sidebar > * { background: rgb(0,100,0); margin-bottom: 5px; }
-#gas-container { height: 250px; }
+#gas-container { height: 250px;}
 #share-id { padding: 15px; }
 #share-id a:link, #share-id a:visited {
     color: rgb(255,255,0);

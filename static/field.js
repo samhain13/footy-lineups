@@ -1,12 +1,9 @@
 (function() {
-    var playerCount = 0; // why? ->ready and ->save-button.click
     var pos0 = {"x": 0, "y": 0};
     function relabel(label) {
         var newLabel = prompt("Set player label:");
         if(newLabel.replace(" ","").length>0) {
             $(label).text(newLabel);
-        } else {
-            alert("Your input was empty.");
         }
     }
     function move(p, e) {
@@ -40,41 +37,28 @@
         frm.hide();
         $("body").append(frm);
         frm.submit();
-    }   
+    }
     $(document).ready( function() {
-        var pitch = $("#gas-container");
-        //var pitch = $("#pitch");
-        // Original line by samhain13; places the players into the pitch.
-        // However, I think this is a bit better :P
-        for (playerCount=0; playerCount<11; playerCount++) {
-            var p = $('<div id="player-' + (playerCount+1) + '" class="player"></div>');
-            if (lineup) {
-                var label = lineup[i]["label"];
-                p.css({"left": lineup[i]["left"], "top": lineup[i]["top"]});
+        var pitch = $("#pitch");
+        for (var i=0; i<11; i++) {
+            var pid = "player-" + (i + 1);
+            if (has_lineup < 1) {
+                var p = $('<div id="' + pid + '" class="player"></div>');
+                var label = "Player " + (i + 1);
+                p.css({"left": -75, "top": i * 50});
             } else {
-                var label = "#" + (playerCount + 1);
-                //p.css({"left": 0, "top": i * 50});
+                var p = $("#" + pid);
+                var label = p.data()["label"];
             }
             p.append($('<div class="player-button"></div>'));
             p.append($('<div class="player-label">' + label + '</div>'));
             pitch.append(p);
-            $("#player-" + playerCount + " .player-button").mousedown(function(e) { move(this, e); });
-            $("#player-" + playerCount + " .player-label").click(function() { relabel(this); });
+            $("#" + pid + " .player-button").mousedown(function(e) { move(this, e); });
+            $("#" + pid + " .player-label").click(function() { relabel(this); });
         }
         $("#reset-button").click(function() {
             location.href = location.href.split("?")[0];
         });
         $("#save-button").click(function() { save_lineup(); });
-        $("#player-add-button").click( function() {
-            playerCount++;
-            var pitch = $("#gas-container");
-            var p = $('<div id="' + playerCount + '" class="player"></div>');
-            p.append($('<div class="player-button"></div>'));
-            p.append($('<div class="player-label">#' + playerCount + '</div>'));
-            pitch.append(p);
-            $("#player-" + playerCount + " .player-button").mousedown(function(e) { move(this, e); });
-            $("#player-" + playerCount + " .player-label").click(function() { relabel(this); });
-        });
-
     });
 }).call(this);
