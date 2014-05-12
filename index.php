@@ -4,6 +4,7 @@
 require_once "settings.php";
 
 $lineup = NULL;
+$lines = array();
 if (isset($_GET["lineup"])) {
     preg_match("/\W+/", $_GET["lineup"], $matches); // We don't want non-alnums.
     if (!$matches) {
@@ -11,22 +12,17 @@ if (isset($_GET["lineup"])) {
         if (file_exists($fn)) {
             $lineup = $_GET["lineup"];
             $handle = fopen($fn, "r");
-            $lines = array();
-            /*
-                Originally, I saved the whole script in the text file as:
-                    var lineup = [ ... ];
-                But I figured that it's too un-secure. Not to say that the
-                following procedure addresses the whole security issue but
-                I figured it should be better than nothing-- even slightly.
-                -- Samhain13
-            */
+            $counter = 1;
             foreach (explode("\n",
                 str_replace("\r", "", fread($handle, filesize($fn)))) as $l) {
                 if ($l) {
                     // The :;: delimiter needs to agree with the JavaScript.
                     $sl = explode(VALUE_DELIMITER, $l);
-                    array_push($lines, "{\"left\": ". $sl[0] .
-                    ", \"top\": " .$sl[1]. ", \"label\": \"" . $sl[2] . "\"}");
+                    array_push($lines, "<div id=\"player-" .$counter. "\" " .
+                        "class=\"player\" data-label=\"" .$sl[2]. "\" " .
+                        "style=\"left:" .  $sl[0] . "px;top:" .$sl[1]. "px;\"" .
+                        "></div>\n");
+                    $counter++;
                 }
             }
             fclose($handle);
@@ -49,22 +45,19 @@ if (isset($_GET["lineup"])) {
         <script>
             var save_action = "<?php echo SITE_DOMAIN; ?>save-lineup.php";
             var value_delimiter = "<?php echo VALUE_DELIMITER; ?>";
-<?php if ($lineup != NULL): ?>
-            var lineup = [
-                <?php echo implode(",\n                ", $lines) . "\n"; ?>
-            ];
-<?php else: ?>
-            var lineup = null;
-<?php endif; ?>
+            var has_lineup = <?php echo count($lines); ?>;
         </script>
         <script src="static/field.js"></script>
     </head>
     <body>
         <h1>Football Line-Up</h1>
-        <div id="pitch"></div>
+        <div id="pitch">
+<?php if ($lineup != NULL): ?>
+<?php     echo implode($lines, ""); ?>
+<?php endif; ?>
+        </div>
         <div id="sidebar">
             <div id="gas-container">
-                <div id="player-add-button">+</div>
             </div>
             <div id="share-id">
                 Drag the black buttons to reposition players;<br />
