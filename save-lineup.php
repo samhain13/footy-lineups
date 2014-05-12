@@ -6,8 +6,8 @@ if (isset($_POST["lineup"])) {
     $fn = md5($_POST["lineup"]);
     $handle = fopen("lineups/" . $fn . ".txt", "w");
     fwrite($handle, $_POST["lineup"]);
-    fclose();
-    $loc = "?lineup=" . $fn;
+    fclose($handle);
+    $loc = "index.php?lineup=" . $fn;
 } else {
     $loc = "error.html";
 }
