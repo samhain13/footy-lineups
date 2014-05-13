@@ -1,19 +1,26 @@
 (function() {
     var pos0 = {"x": 0, "y": 0};
     function relabel(label) {
-        $(label).text(prompt("Set player label:"));
+        var newLabel = prompt("Set player label:");
+        if(newLabel.replace(" ","").length>0) {
+            $(label).text(newLabel);
+        }
     }
     function move(p, e) {
-        pos0 = {"x": e.pageX, "y": e.pageY};
-        $(window).mouseup( function(e) {
+        pos0 = {"x": e.pageX, "y": e.pageY}; // initial position.
+        $(window).mousemove( function(e) {
             var player = $(p).parent();
             var pos1 = {"x": e.pageX, "y": e.pageY};
             player.css({
                 "left": parseInt(player.css("left")) + (pos1["x"] - pos0["x"]),
                 "top": parseInt(player.css("top")) + (pos1["y"] - pos0["y"]),
             });
+            pos0 = pos1; // update the actual position.
+        });
+        $(window).mouseup( function(e) {
+            $(window).unbind("mousemove");
             $(window).unbind("mouseup");
-        })
+        });
     }
     function save_lineup() {
         var players = [];
@@ -38,7 +45,7 @@
             if (has_lineup < 1) {
                 var p = $('<div id="' + pid + '" class="player"></div>');
                 var label = "Player " + (i + 1);
-                p.css({"left": 0, "top": i * 50});
+                p.css({"left": -75, "top": i * 50});
             } else {
                 var p = $("#" + pid);
                 var label = p.data()["label"];
