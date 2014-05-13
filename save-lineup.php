@@ -7,11 +7,9 @@ if (isset($_POST["lineup"])) {
     $handle = fopen("lineups/" . $fn . ".txt", "w");
     fwrite($handle, $_POST["lineup"]);
     fclose();
-    $loc = "?lineup=" . $fn;
+    header("Location: " . SHOW_LINEUP_URI . $fn);
 } else {
-    $loc = "error.html";
+    header("Location: " . ERROR_PAGE);
 }
-
-header("Location: " . SITE_DOMAIN . $loc);
 
 ?>

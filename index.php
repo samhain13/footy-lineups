@@ -49,7 +49,7 @@ if (isset($_GET["lineup"])) {
         <link rel="stylesheet" href="static/styles.css"/>
         <script src="static/jquery.js"></script>
         <script>
-            var save_action = "<?php echo SITE_DOMAIN; ?>save-lineup.php";
+            var save_action = "<?php echo SAVE_LINEUP_URI; ?>";
             var value_delimiter = "<?php echo VALUE_DELIMITER; ?>";
             var has_lineup = <?php echo count($lines); ?>;
         </script>
@@ -69,7 +69,7 @@ if (isset($_GET["lineup"])) {
                 click the player labels to rename them.
 <?php if ($lineup != NULL): ?>
                 <br /><br />Share this Lineup:<br />
-                <a href="<?php echo SITE_DOMAIN . "?lineup=" . $lineup; ?>"><?php echo SITE_DOMAIN . "?lineup=" . $lineup; ?></a>
+                <a href="<?php echo SHOW_LINEUP_URI . $lineup; ?>"><?php echo SHOW_LINEUP_URI . $lineup; ?></a>
             </div>
             <div id="reset-button">Reset</div>
 <?php else: ?>
