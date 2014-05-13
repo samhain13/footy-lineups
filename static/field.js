@@ -27,8 +27,7 @@
         $(".player").each(function() {
             var l = $($(this).find(".player-label")).text();
             var p = parseInt($(this).css("left")) + value_delimiter +
-                parseInt($(this).css("top")) + value_delimiter +
-                l.replace(/"/g, "\\\"");
+                parseInt($(this).css("top")) + value_delimiter + l;
             players.push(p);
         });
         var frm = $('<form action="' +save_action+ '" method="post"></form>');

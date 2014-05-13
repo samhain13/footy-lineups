@@ -18,11 +18,17 @@ if (isset($_GET["lineup"])) {
                 if ($l) {
                     // The :;: delimiter needs to agree with the JavaScript.
                     $sl = explode(VALUE_DELIMITER, $l);
-                    array_push($lines, "<div id=\"player-" .$counter. "\" " .
-                        "class=\"player\" data-label=\"" .$sl[2]. "\" " .
-                        "style=\"left:" .  $sl[0] . "px;top:" .$sl[1]. "px;\"" .
-                        "></div>\n");
-                    $counter++;
+                    if (is_numeric($sl[0]) && is_numeric($sl[1])) {
+                        array_push($lines, "<div id=\"player-" .$counter. "\" " .
+                            "class=\"player\" data-label=\"" .
+                            str_replace("\"",  "&quot;", $sl[2]). "\" " .
+                            "style=\"left:" .  $sl[0] . "px;top:" .$sl[1]. "px;\"" .
+                            "></div>\n");
+                        $counter++;
+                    } else {
+                        $lineup = NULL;
+                        break;
+                    }
                 }
             }
             fclose($handle);
