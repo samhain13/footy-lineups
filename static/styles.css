@@ -43,7 +43,12 @@ h1 {
         height: 20px;
         width: 20px;
     }
-    .player-label { font-size: 11px; }
+    .player-label {
+        background: rgba(0,0,0,0.5);
+        border-radius: 4px;
+        font-size: 11px;
+        padding: 2px 4px;
+    }
 
 #sidebar {
     float: right;
