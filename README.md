@@ -20,8 +20,8 @@ Production
 * Must have a PHP5-capable webserver.
 * Open settings.php and modify SITE_DOMAIN constant accordingly.  
   It should point to where footy-lineups is installed. For example,  
-  http://play.abcruz.com/footy-lineups is the value in the demo site.  
-  DO NOT put a trailing slash.
+  http://play.abcruz.com/footy-lineups/ is the value in the demo site.  
+  DO NOT FORGET to put a trailing slash.
 * Ensure that the lineups directory is writable by the system user that runs the webserver.  
   DO NOT set it to 0777! Bad things can happen.
 
