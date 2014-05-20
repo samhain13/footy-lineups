@@ -1,42 +1,7 @@
 <?php
 
-
 require_once "settings.php";
-
-$lineup = NULL;
-$lines = array();
-if (isset($_GET["lineup"])) {
-    preg_match("/\W+/", $_GET["lineup"], $matches); // We don't want non-alnums.
-    if (!$matches) {
-        $fn = "lineups/" . $_GET["lineup"] . ".txt";
-        if (file_exists($fn)) {
-            $lineup = $_GET["lineup"];
-            $handle = fopen($fn, "r");
-            $counter = 1;
-            foreach (explode("\n",
-                str_replace("\r", "", fread($handle, filesize($fn)))) as $l) {
-                if ($l) {
-                    // The :;: delimiter needs to agree with the JavaScript.
-                    $sl = explode(VALUE_DELIMITER, $l);
-                    if (is_numeric($sl[0]) && is_numeric($sl[1])) {
-                        array_push($lines, "<div id=\"player-" .$counter. "\" " .
-                            "class=\"player\" data-label=\"" .
-                            str_replace("\"",  "&quot;", $sl[2]). "\" " .
-                            "style=\"left:" .  $sl[0] . "px;top:" .$sl[1]. "px;\"" .
-                            "></div>\n");
-                        $counter++;
-                    } else {
-                        $lineup = NULL;
-                        break;
-                    }
-                }
-            }
-            fclose($handle);
-        } else {
-            header("Location: " . SITE_DOMAIN . "error.html");
-        }
-    }
-}
+$field = new FieldProcessor();
 
 ?>
 <!DOCTYPE html>
@@ -51,27 +16,26 @@ if (isset($_GET["lineup"])) {
         <script>
             var save_action = "<?php echo SAVE_LINEUP_URI; ?>";
             var value_delimiter = "<?php echo VALUE_DELIMITER; ?>";
-            var has_lineup = <?php echo count($lines); ?>;
+            var has_lineup = <?php echo count($field->lineup_settings); ?>;
         </script>
         <script src="static/field.js"></script>
     </head>
     <body>
         <h1>Football Line-Up</h1>
         <div id="pitch">
-<?php if ($lineup != NULL): ?>
-<?php     echo implode($lines, ""); ?>
-<?php endif; ?>
+<?php $field->draw_players(); ?>
         </div>
         <div id="sidebar">
             <div id="gas-container"></div>
             <div id="share-id">
                 Drag the black buttons to reposition players;<br />
                 click the player labels to rename them.
-<?php if ($lineup != NULL): ?>
-                <br /><br />Share this Lineup:<br />
-                <a href="<?php echo SHOW_LINEUP_URI . $lineup; ?>"><?php echo SHOW_LINEUP_URI . $lineup; ?></a>
+<?php if ($field->has_lineup): ?>
+                <br /><br />
+                Share this lineup:<br />
+                [ <a href="<?php $field->show_uri(); ?>"><?php $field->show_uri(); ?></a> ]
             </div>
-            <div id="reset-button">Reset</div>
+            <div id="reset-button">Reset Lineup</div>
 <?php else: ?>
             </div>
 <?php endif; ?>
